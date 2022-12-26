@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather');
+
 html,
 body {
   height: 100%;
@@ -7,6 +9,10 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+#test {
+  background-color: aquamarine;
 }
 
 .box {
