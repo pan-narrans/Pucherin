@@ -1,4 +1,6 @@
-
+/**
+ * Manages the canvas and paints the *Pucherin* board using the received cell info.
+ */
 class Board {
   #canvas = document.getElementById('board_canvas');
   #ctx = this.#canvas.getContext('2d');
@@ -93,6 +95,7 @@ class Board {
     this.#ctx.fill();
   }
 
+  // TODO: make the board look good on mobile devices by making it vertical.
   paint_board(numbers) {
     let board_radius = this.#canvas.clientWidth / 5;
     let section_radius = board_radius / 3;
@@ -112,11 +115,6 @@ class Board {
         'x': board_radius * cos * Math.exp(c1 * Math.abs(board_radius * cos)) + this.#canvas.width / 2,
         'y': board_radius * sin * (1 / Math.exp(c2 * Math.abs(board_radius * sin))) + this.#canvas.height / 2,
       }
-      // let c = 1.000006;
-      // let coordinates = {
-      //   'x': board_radius * cos * Math.pow(c, Math.pow(board_radius * cos, 2)) + this.#canvas.width / 2,
-      //   'y': board_radius * sin + this.#canvas.height / 2,
-      // }
 
       // Paint the section and increase the angle.
       this.paint_cell(coordinates.x, coordinates.y, section_radius, numbers[i]);
