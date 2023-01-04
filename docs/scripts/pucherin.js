@@ -1,31 +1,71 @@
 class Pucherin {
+  #game_presets = {
+    'min players': 2,
+    'max players': 6,
+    'cells': 10,             // number of cells
+    'puchero': 7,           // number of the puchero
+    'starting tokens': 50,  // tokens per player
+  }
+
+  // DOM references
+  #menu_dom = document.getElementById('menu');
+  #roll_button = document.getElementById('throw_dice');
+
+  // Element references
   #board;
   #game_controller;
-
-  #max_players = 6;
-  #cell_numbers = [3, 4, 5, 6, 8, 9, 10, 11, 2];
-
-  #main_menu = document.getElementById('main_menu');
-  #game_menu = document.getElementById('game_menu');
-  #roll_button = document.getElementById('throw_dice');
+  #menu;
 
   constructor() {
     this.#board = new Board();
-    this.#game_controller = new GameController();
+    this.#menu = new Menu(this, this.#menu_dom);
+    this.#game_controller = new GameController(this, this.#game_presets);
   }
 
-  main_menu() {
-    this.#board.paint_board(this.#cell_numbers);
-
-    this.#main_menu.style.display = 'block';
-    this.#game_menu.style.display = 'none';
+  start() {
+    this.#board.paint_board(this.#game_controller.get_cells(), this.#game_presets.puchero);
+    this.#menu.main_menu();
   }
 
-  new_game() {
-    this.#main_menu.style.display = 'none';
-    this.#game_menu.style.display = 'block';
-    this.#game_controller.start_game(this.#cell_numbers, this.#max_players);
+  handle_click(key) {
+    switch (key) {
+      case 'new_game':
+        this.new_game();
+        break;
+      case 'end_game':
+        this.end_game();
+        break;
+      case 'throw_dice':
+        this.#game_controller.next_turn();
+        this.#board.paint_board(this.#game_controller.get_cells(), this.#game_presets.puchero);
+        break;
+      default:
+        console.log(key);
+        break;
+    }
   }
 
+  async new_game() {
+    const n_players = parseInt(document.getElementById('n_players').value);
+    if (await this.#menu.game_menu()) {
+      this.#game_controller.start_game(n_players);
+      this.#menu.print_players(this.#game_controller.get_players());
+    }
+  }
+
+  end_game() {
+    this.#game_controller.close_game();
+    this.start();
+  }
+
+  log(str) {
+    try { this.#menu.log(str); }
+    catch { console.log(`Couldn't print: ${str}`) }
+  }
+}
+
+window.onload = function () {
+  const pucherin = new Pucherin();
+  pucherin.start();
 }
 

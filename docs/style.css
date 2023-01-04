@@ -39,6 +39,7 @@ main>* {
 #game_log>* {
   width: 100%;
   overflow-wrap: break-word;
+  font-family: monospace;
 }
 
 
@@ -55,8 +56,4 @@ main>* {
 
 .shaded {
   background-color: aliceblue;
-}
-
-#game_menu {
-  display: none;
 }

@@ -1,10 +1,10 @@
 class Cell {
-  number;
+  #number;
   #tokens;
 
   constructor(number) {
     this.reset_tokens();
-    this.number = number;
+    this.#number = number;
   }
 
   add_token() {
@@ -20,6 +20,6 @@ class Cell {
   }
 
   get_number() {
-    return this.number;
+    return this.#number;
   }
 }

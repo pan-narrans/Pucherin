@@ -96,13 +96,16 @@ class Board {
   }
 
   // TODO: make the board look good on mobile devices by making it vertical.
-  paint_board(numbers) {
+  paint_board(cells, puchero) {
     let board_radius = this.#canvas.clientWidth / 5;
     let section_radius = board_radius / 3;
-    let angle = 50;
+    let puchero_radius = section_radius * 1.1;
+    let angle = 10;
 
     // Paint and space out the cells
-    for (let i = 0; i < numbers.length; i++) {
+    for (let i = 0; i < cells.length; i++) {
+      if (i == puchero - 2) continue;
+
       // Calculate cosine and sine, converting the angle to radians.
       let cos = Math.cos(Math.PI * angle / 180);
       let sin = Math.sin(Math.PI * angle / 180);
@@ -117,12 +120,22 @@ class Board {
       }
 
       // Paint the section and increase the angle.
-      this.paint_cell(coordinates.x, coordinates.y, section_radius, numbers[i]);
-      this.paint_tokens(coordinates.x, coordinates.y, section_radius, numbers[i], 3);
-      angle += 360 / numbers.length;
+      this.paint_cell(coordinates.x, coordinates.y, section_radius, cells[i].get_number());
+      this.paint_tokens(coordinates.x, coordinates.y, section_radius, cells[i].get_number(), cells[i].get_tokens());
+      angle += 360 / (cells.length - 1);
     }
-  }
 
+    // TODO
+    // Pain puchero  
+    let coordinates = {
+      'x': this.#canvas.width / 2,
+      'y': this.#canvas.height / 2,
+    }
+    // Paint the section and increase the angle.
+    this.paint_cell(coordinates.x, coordinates.y, puchero_radius, cells[puchero - 2].get_number());
+    this.paint_tokens(coordinates.x, coordinates.y, puchero_radius, 20, cells[puchero - 2].get_tokens());
+
+  }
 }
 
 document.getElementById('board')

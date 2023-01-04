@@ -18,53 +18,14 @@
     <aside id="board">
       <canvas id="board_canvas"></canvas>
     </aside>
-
-    <!-- Main Menu -->
-    <article id="main_menu">
+    <article>
       <h1>Pucherin</h1>
-      <p>Juego del pucherin, reglas:</p>
-      <ul>
-        <li>Si una ficha se completa, el jugador se lleva todas las fichas de la casilla.</li>
-        <li>Si sacas un 7, se añade una ficha al puchero</li>
-        <li>Si sacas un 12, te llevas el contenido del puchero</li>
-        <li>Si los jugadores no tienen más fichas que poner, se llevan las fichas que queden en la casilla</li>
-        <li>Si los jugadores no tienen más fichas que poner y saca un 12, se lleva todas las fichas del tablero,
-          incluido el puchero y finaliza el juego.</li>
-      </ul>
-      <button id="new_game">Nueva partida</button>
-      <button id="high_scores">Records</button>
-    </article>
 
-    <!-- Partida -->
-    <article id="game_menu">
-      <h1>Pucherin</h1>
-      <ul>
-        <li>Jugador 1: 50 fichas</li>
-        <li>Jugador 2: 50 fichas</li>
-        <li>Jugador 3: 50 fichas</li>
-        <li>Jugador 4: 50 fichas</li>
-      </ul>
-      <button id="throw_dice">Tirar Dados</button>
-      <button id="print_board">Imprimir Tablero</button>
+      <section id="menu">
 
-      <section id="game_log">
-        <pre>> ...</pre>
-        <pre>> Es el turno del jugador 2.</pre>
-        <pre>> ¡La ficha se va al puchero!</pre>
-        <pre>> Sale un 7.</pre>
-        <pre>> El jugador 1 tira los dados.</pre>
-        <pre>> Es el turno del jugador 1.</pre>
-        <pre>> Se acaba de empezar una nueva partida.</pre>
-        <pre>> Es el turno del jugador 2.</pre>
-        <pre>> ¡La ficha se va al puchero!</pre>
-        <pre>> Sale un 7.</pre>
-        <pre>> El jugador 1 tira los dados.</pre>
-        <pre>> Es el turno del jugador 1.</pre>
-        <pre>> Se acaba de empezar una nueva partida.</pre>
       </section>
-
-      <button id="end_game">Acabar Partida</button>
     </article>
+
   </main>
 
   <!-- <div class="container">
@@ -73,12 +34,12 @@
     </div>
   </div> -->
 
-  <script src="scripts/board.js"></script>
+  <script src="scripts/cell.js"></script>
   <script src="scripts/player.js"></script>
   <script src="scripts/game_controller.js"></script>
-  <script src="scripts/cell.js"></script>
+  <script src="scripts/board.js"></script>
+  <script src="scripts/menu.js"></script>
   <script src="scripts/pucherin.js"></script>
-  <script src="scripts/main.js"></script>
   <!-- <script src="scripts/script.js"></script> -->
 
 </body>
