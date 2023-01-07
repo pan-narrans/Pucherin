@@ -5,31 +5,16 @@ class Player {
 
   constructor(name, n_tokens) {
     this.#name = name;
-    this.#tokens = n_tokens;
+    this.#tokens = parseInt(n_tokens);
     this.#points = 0;
   }
 
-  get_name() {
-    return this.#name;
-  }
+  set_tokens(tokens) { this.#tokens = (tokens > 0) ? tokens : 0; }
 
-  get_tokens() {
-    return this.#tokens;
-  }
+  get_name() { return this.#name; }
+  get_tokens() { return this.#tokens; }
+  get_points() { return this.#points; }
 
-  get_points() {
-    return this.#points;
-  }
-
-  add_points(n) {
-    this.#points += n;
-  }
-
-  subtract_token() {
-    this.set_tokens(this.#tokens--);
-  }
-
-  set_tokens(tokens) {
-    this.#tokens = (tokens > 0) ? tokens : 0;
-  }
+  add_points(n) { this.#points += n; }
+  subtract_token() { this.set_tokens(this.get_tokens() - 1); }
 }

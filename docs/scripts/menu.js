@@ -76,7 +76,7 @@ class Menu {
     players.forEach(
       p => {
         const li = document.createElement('li');
-        li.innerHTML = ` ${p.get_name()}: ${p.get_tokens()} tokens`
+        li.innerHTML = ` ${p.get_name()}: ${p.get_tokens()} tokens, ${p.get_points()} points`
         ul.appendChild(li);
       }
     )

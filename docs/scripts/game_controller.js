@@ -14,8 +14,6 @@ class GameController {
 
   get_cells() { return this.#cells; }
 
-  get_cell(num) { return this.#cells.filter(cell => cell.get_number() == num); }
-
   get_players() { return this.#players; }
 
   get_player_tokens() { return this.#players.map(p => p.get_tokens()).reduce((p_1, p_2) => p_1 + p_2) }
@@ -24,7 +22,10 @@ class GameController {
 
   create_cells(number) {
     this.#cells = [];
-    for (let i = 2; i < number + 2; i++) { this.#cells.push(new Cell(i)); }
+    for (let i = 2; i < number + 2; i++) {
+      let capacity = (i !== this.#presets['puchero']) ? i : Number.MAX_SAFE_INTEGER;
+      this.#cells.push(new Cell(i, capacity));
+    }
   }
 
   create_players(n_players, n_tokens) {
@@ -33,27 +34,53 @@ class GameController {
       this.#players.push(new Player(`Player ${i}`, n_tokens));
   }
 
+  // TODO limpiar
+  // TODO win condition
   next_turn() {
-
     let dice = this.dice_roll();
+    let player = this.#last_player++ % this.#players.length;
+    let cell = dice - 2;
+
+    this.#controller.log(`${this.#players[player].get_name()} rolls a ${dice}.`);
+
     switch (dice) {
       case 12:
-        console.log(' te llevas puchero');
+        cell = this.#presets['puchero'] - 2;
+
+        this.#controller.log(` `);
+        this.#controller.log(`${this.#players[player].get_name()} gets ${this.#cells[cell].get_tokens()} points.`);
+        this.#controller.log(`${this.#players[player].get_name()} gets the puchero!`)
+        this.#controller.log(` `);
+
+        this.#players[player].add_points(this.#cells[cell].get_tokens());
+        this.#cells[cell].reset_tokens()
         break;
+
       default:
-        this.#cells[dice - 2].add_token();
+        this.#cells[cell].add_token();
+        this.#players[player].subtract_token();
+
+        if (this.#cells[cell].is_full()) {
+          this.#controller.log(` `);
+          this.#controller.log(`${this.#players[player].get_name()} gets ${this.#cells[cell].get_tokens()} points.`);
+          this.#controller.log(`Cell #${this.#cells[cell].get_number()} is full!`);
+          this.#controller.log(` `);
+
+          this.#players[player].add_points(this.#cells[cell].get_tokens());
+          this.#cells[cell].reset_tokens()
+        }
     }
+
 
   }
 
   dice_roll() {
     let rolled_number = Math.ceil(Math.random() * 11) + 1;
-    this.#controller.log(`The dice rolls: ${rolled_number}`);
     return rolled_number;
   }
 
   start_game(n_players) {
-    this.#last_player = 1;
+    this.#last_player = 0;
     this.reset_cells();
     this.create_players(n_players, this.#presets['starting tokens']);
 

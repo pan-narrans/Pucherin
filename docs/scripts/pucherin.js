@@ -38,6 +38,7 @@ class Pucherin {
       case 'throw_dice':
         this.#game_controller.next_turn();
         this.#board.paint_board(this.#game_controller.get_cells(), this.#game_presets.puchero);
+        this.#menu.print_players(this.#game_controller.get_players());
         break;
       default:
         console.log(key);
