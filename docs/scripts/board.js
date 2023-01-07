@@ -31,8 +31,24 @@ class Board {
   }
 
   static resize_canvas() {
-    document.getElementById('board_canvas').width = document.getElementById('board').clientWidth;
-    document.getElementById('board_canvas').height = document.getElementById('board').clientHeight * 0.997;
+    const canvas = document.getElementById('board_canvas');
+    const ctx = canvas.getContext('2d');
+    let scale = 2;
+
+    let width = document.getElementById('board').clientWidth;
+    let height = document.getElementById('board').clientHeight;
+
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+
+    // ctx.scale(scale, scale);
+
+    console.log(document.getElementById('board').clientWidth, document.getElementById('board').clientHeight);
+    console.log(canvas.style.width, canvas.style.height);
+    console.log(canvas.width, canvas.height);
   }
 
   paint_cell(x, y, r, n) {
@@ -97,7 +113,7 @@ class Board {
 
   // TODO: make the board look good on mobile devices by making it vertical.
   paint_board(cells, puchero) {
-    let board_radius = this.#canvas.clientWidth / 5;
+    let board_radius = this.#canvas.width / 5;
     let section_radius = board_radius / 3;
     let puchero_radius = section_radius * 1.1;
     let angle = 10;
@@ -126,7 +142,7 @@ class Board {
     }
 
     // TODO
-    // Pain puchero  
+    // Pain puchero
     let coordinates = {
       'x': this.#canvas.width / 2,
       'y': this.#canvas.height / 2,
