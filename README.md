@@ -3,9 +3,14 @@
 ![tablero](img/puchero.jpg)
 
 - [Pucherin](#pucherin)
+  - [Play the game](#play-the-game)
   - [Historias de usuario](#historias-de-usuario)
   - [Requisitos funcionales (reglas)](#requisitos-funcionales-reglas)
   - [Requisitos técnicos](#requisitos-técnicos)
+
+## Play the game
+
+The game is deployed using github pages and can be played [through here](https://pan-narrans.github.io/Pucherin/).
 
 ## Historias de usuario
 
