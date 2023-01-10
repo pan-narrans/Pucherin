@@ -1,4 +1,4 @@
-<p>Juego del pucherin, reglas:</p>
+<p>Reglas del juego:</p>
 <ul>
   <li>Si una ficha se completa, el jugador se lleva todas las fichas de la casilla.</li>
   <li>Si sacas un 7, se añade una ficha al puchero</li>
@@ -7,12 +7,21 @@
   <li>Si los jugadores no tienen más fichas que poner y saca un 12, se lleva todas las fichas del tablero,
     incluido el puchero y finaliza el juego.</li>
 </ul>
-<label for="n_players">Jugadores:</label>
-<input id="n_players"
-       type="number"
-       min="2"
-       max="6"
-       value="2">
 
-<button id="new_game">Nueva partida</button>
-<button id="high_scores">Records</button>
+<div class="input-group mb-3">
+  <label for="n_players"
+         class="input-group-text">Número de jugadores:</label>
+  <input id="n_players"
+         class="form-control"
+         type="number"
+         min="2"
+         max="6"
+         value="2">
+</div>
+
+<div class="d-flex justify-content-between">
+  <button id="new_game"
+          class="btn btn-primary">Nueva partida</button>
+  <button id="high_scores"
+          class="btn btn-outline-secondary">Records</button>
+</div>

@@ -5,13 +5,13 @@
 html,
 body,
 main {
+  overflow: hidden;
   height: 100%;
   padding: 0;
   margin: 0;
 }
 
 main {
-  background-color: cadetblue;
   display: flex;
 }
 
@@ -20,20 +20,27 @@ main>* {
 }
 
 #board {
-  flex: 2;
+  background-color: cadetblue;
+  flex: 3;
+}
+
+#console {
+  margin: 2% 5%;
+}
+
+#menu {
+  height: 100%;
 }
 
 #game_log {
-  height: 250px;
-  width: 250px;
+  max-height: 500px;
+  height: fit-content;
+
   overflow-y: scroll;
   overflow-x: clip;
 
   padding: 5px 25px;
-  border-radius: 5px;
-  color: black;
-  border: solid rgba(0, 0, 0, 0.486) 2px;
-  background-color: rgba(0, 0, 0, 0.288);
+  background-color: rgb(252, 255, 255);
 }
 
 #game_log>* {
