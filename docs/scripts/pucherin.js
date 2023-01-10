@@ -2,14 +2,13 @@ class Pucherin {
   #game_presets = {
     'min players': 2,
     'max players': 6,
-    'cells': 10,             // number of cells
-    'puchero': 7,           // number of the puchero
-    'starting tokens': 50,  // tokens per player
+    'cells': 10,              // number of cells
+    'puchero': 7,             // number of the puchero
+    'starting tokens': 5,    // tokens per player
   }
 
   // DOM references
   #menu_dom = document.getElementById('menu');
-  #roll_button = document.getElementById('throw_dice');
 
   // Element references
   #board;
@@ -60,13 +59,22 @@ class Pucherin {
   }
 
   log(str) {
-    try { this.#menu.log(str); }
+    try { this.#menu.log(''); str.split('\n').reverse().forEach(line => { this.#menu.log(line.trim()); }); }
     catch { console.log(`Couldn't print: ${str}`) }
+  }
+
+  auto_game() {
+    while (this.#game_controller.next_turn()) { }
   }
 }
 
+let pucherin;
+
 window.onload = function () {
-  const pucherin = new Pucherin();
+  pucherin = new Pucherin();
   pucherin.start();
 }
 
+function auto_game() {
+  pucherin.auto_game();
+}
