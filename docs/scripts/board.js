@@ -13,6 +13,7 @@ class Board {
     'orange': '#9E4B27',
     'red': '#B8342E',
     'brown': '#3C211A',
+    'black': '#222'
   }
 
   #cell_colors = [
@@ -26,13 +27,21 @@ class Board {
     [this.#color.dark_green, 1],
   ];
 
+  #puchero_colors = [
+    [this.#color.black, 30],
+    [this.#color.lime, 2],
+    [this.#color.dark_green, 1],
+    [this.#color.red, 25],
+    [this.#color.dark_green, 1],
+    [this.#color.lime, 2],
+    [this.#color.dark_green, 1],
+  ];
 
   constructor() {
   }
 
   static resize_canvas() {
     const canvas = document.getElementById('board_canvas');
-    const ctx = canvas.getContext('2d');
     let scale = 2;
 
     let width = document.getElementById('board').clientWidth;
@@ -41,38 +50,35 @@ class Board {
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
 
+    canvas.style.width = "100%";
+    canvas.style.height = "auto";
+
     canvas.width = width * scale;
     canvas.height = height * scale;
-
-    // ctx.scale(scale, scale);
-
-    console.log(document.getElementById('board').clientWidth, document.getElementById('board').clientHeight);
-    console.log(canvas.style.width, canvas.style.height);
-    console.log(canvas.width, canvas.height);
   }
 
-  paint_cell(x, y, r, n) {
+  paint_cell(x, y, r, n, color) {
     // Generate gradient
     let color_weight_sum = 0;
-    this.#cell_colors.forEach(e => color_weight_sum += e[1]);
+    color.forEach(e => color_weight_sum += e[1]);
 
     const gradient = this.#ctx.createRadialGradient(x, y, 0, x, y, r)
 
     // Two color stops are added at the same place with different colors,
     // to achieve sharp edges.
     let two = 0;
-    for (let i = 0; i < this.#cell_colors.length; i++) {
+    for (let i = 0; i < color.length; i++) {
       let one = two;
-      two += (this.#cell_colors[i][1] / color_weight_sum); // Weights are normalized to [0,1]
-      gradient.addColorStop(one, this.#cell_colors[i][0]);
-      gradient.addColorStop(two, this.#cell_colors[i][0]);
+      two += (color[i][1] / color_weight_sum); // Weights are normalized to [0,1]
+      gradient.addColorStop(one, color[i][0]);
+      gradient.addColorStop(two, color[i][0]);
     }
 
     this.paint_circle(x, y, r, gradient)
 
     // Paint number
     // Size based on the radius of the inner-most circle.
-    let size = (this.#cell_colors[0][1] / color_weight_sum * r * 1.25);
+    let size = (color[0][1] / color_weight_sum * r * 1.25);
 
     this.#ctx.fillStyle = this.#color.orange;
     this.#ctx.font = `bold ${size}px Arial`;
@@ -112,9 +118,15 @@ class Board {
   }
 
   // TODO: make the board look good on mobile devices by making it vertical.
+  /**
+   * Paints the pucherin board.
+   * @param {*} cells Cell objects to paint.
+   * @param {*} puchero Number of the puchero cell.
+   */
   paint_board(cells, puchero) {
-    let board_radius = this.#canvas.width / 5;
-    let section_radius = board_radius / 3;
+    let board_width = this.#canvas.width / 3;
+    let board_height = this.#canvas.height / 3;
+    let section_radius = board_width / 4.5;
     let puchero_radius = section_radius * 1.1;
     let angle = 10;
 
@@ -128,29 +140,27 @@ class Board {
 
       // Calculate the coordinates of the center of the sections using the circle formula,
       // but lying to make it look elliptical.
-      let c1 = 0.45 / board_radius;
-      let c2 = 0.03 / board_radius;
+      // let c1 = 0.45 / board_width;
+      // let c2 = 0.03 / board_width;
+      // let coordinates = {
+      //   'x': board_width * cos * Math.exp(c1 * Math.abs(board_width * cos)) + this.#canvas.width / 2,
+      //   'y': board_width * sin * (1 / Math.exp(c2 * Math.abs(board_width * sin))) + this.#canvas.height / 2,
+      // }
       let coordinates = {
-        'x': board_radius * cos * Math.exp(c1 * Math.abs(board_radius * cos)) + this.#canvas.width / 2,
-        'y': board_radius * sin * (1 / Math.exp(c2 * Math.abs(board_radius * sin))) + this.#canvas.height / 2,
+        'x': board_width * cos + this.#canvas.width / 2,
+        'y': board_height * sin + this.#canvas.height / 2,
       }
 
       // Paint the section and increase the angle.
-      this.paint_cell(coordinates.x, coordinates.y, section_radius, cells[i].get_number());
+      this.paint_cell(coordinates.x, coordinates.y, section_radius, cells[i].get_number(), this.#cell_colors);
       this.paint_tokens(coordinates.x, coordinates.y, section_radius, cells[i].get_number(), cells[i].get_tokens());
       angle += 360 / (cells.length - 1);
     }
 
-    // TODO
     // Pain puchero
-    let coordinates = {
-      'x': this.#canvas.width / 2,
-      'y': this.#canvas.height / 2,
-    }
-    // Paint the section and increase the angle.
-    this.paint_cell(coordinates.x, coordinates.y, puchero_radius, cells[puchero - 2].get_number());
-    this.paint_tokens(coordinates.x, coordinates.y, puchero_radius, 20, cells[puchero - 2].get_tokens());
-
+    let coordinates = { 'x': this.#canvas.width / 2, 'y': this.#canvas.height / 2, }
+    this.paint_cell(coordinates.x, coordinates.y, puchero_radius, cells[puchero - 2].get_number(), this.#puchero_colors);
+    //this.paint_tokens(coordinates.x, coordinates.y, puchero_radius, 15, cells[puchero - 2].get_tokens());
   }
 }
 
