@@ -1,39 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather');
 
-* {}
+* {
+  padding: 0;
+  margin: 0;
+}
 
 html,
 body,
 main {
-  overflow: hidden;
   height: 100%;
   padding: 0;
   margin: 0;
 }
 
-main {
-  display: flex;
-}
-
-main>* {
-  flex: 1;
-}
-
 #board {
   background-color: cadetblue;
-  flex: 3;
 }
 
 #console {
-  margin: 2% 5%;
+  padding: 2% 5%;
 }
 
-#menu {
-  height: 100%;
-}
 
 #game_log {
-  max-height: 500px;
+  max-height: 300px;
   height: fit-content;
 
   overflow-y: scroll;
@@ -63,4 +53,10 @@ main>* {
 
 .shaded {
   background-color: aliceblue;
+}
+
+@media screen and (max-width: 480px) {
+  #board {
+    height: 40%;
+  }
 }

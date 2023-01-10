@@ -22,16 +22,20 @@
 
 <body>
 
-  <main>
-    <aside id="board">
-      <canvas id="board_canvas"></canvas>
-    </aside>
-    <article id="console">
-      <h1>Pucherin</h1>
+  <main class="container-fluid">
+    <div class="row h-100">
+      <aside id="board"
+             class="col-lg-8 col-12">
+        <canvas id="board_canvas"></canvas>
+      </aside>
 
-      <section id="menu"> </section>
-    </article>
+      <article id="console"
+               class="col-lg-4 col-12">
+        <h1>Pucherin</h1>
 
+        <section id="menu"> </section>
+      </article>
+    </div>
   </main>
 
   <script src="scripts/cell.js"></script>
