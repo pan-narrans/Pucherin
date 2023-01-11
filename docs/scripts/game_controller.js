@@ -21,8 +21,10 @@ class GameController {
   get_player_tokens() { return this.#players.map(p => p.get_tokens()).reduce((p_1, p_2) => p_1 + p_2) }
   /** @returns The current playing player. */
   get_current_player() { return this.#players[this.#turn % this.#players.length]; }
+  /** @returns The current winning player. */
+  get_winner() { return this.sort_players()[0]; }
   /** Sorts the player array, use only for the final ranking. */
-  sort_players() { this.#players.sort((p_1, p_2) => p_1.get_points() < p_2.get_points()).slice(0, 3); }
+  sort_players() { return this.#players.slice().sort((p_1, p_2) => p_1.get_points() < p_2.get_points()); }
 
   /** Resets all the cells' tokens. */
   reset_cells() { this.#cells.forEach(cell => cell.reset_tokens()) }
@@ -118,7 +120,7 @@ class GameController {
     // End game message & sort players.
     if (this.get_cell_tokens() === 0 && this.get_player_tokens() === 0) {
       this.sort_players()
-      this.#ctrl.log(`The game has ended.\nThanks for playing.`);
+      this.#ctrl.log(`The game has ended.\n${this.get_winner().get_name()} wins the game!\nThanks for playing.`);
     }
 
     return true;

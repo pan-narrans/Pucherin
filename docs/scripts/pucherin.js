@@ -4,7 +4,7 @@ class Pucherin {
     'max players': 6,
     'cells': 10,              // number of cells
     'puchero': 7,             // number of the puchero
-    'starting tokens': 5,    // tokens per player
+    'starting tokens': 50,    // tokens per player
   }
 
   // DOM references
@@ -35,10 +35,7 @@ class Pucherin {
         this.end_game();
         break;
       case 'throw_dice':
-        this.#game_controller.next_turn();
-        this.#board.paint_board(this.#game_controller.get_cells(), this.#game_presets.puchero);
-        this.#menu.print_players(this.#game_controller.get_players());
-        this.#menu.print_turn(this.#game_controller.get_current_player());
+        this.next_turn();
         break;
       case 'print_board':
         this.#menu.print_board(this.#game_controller.get_cells())
@@ -55,6 +52,20 @@ class Pucherin {
       this.#game_controller.start_game(n_players);
       this.#menu.print_players(this.#game_controller.get_players());
       this.#menu.print_turn(this.#game_controller.get_current_player());
+    }
+  }
+
+  next_turn() {
+    // Game is in progress.
+    if (this.#game_controller.next_turn()) {
+      this.#board.paint_board(this.#game_controller.get_cells(), this.#game_presets.puchero);
+      this.#menu.print_players(this.#game_controller.get_players());
+      this.#menu.print_turn(this.#game_controller.get_current_player());
+    }
+    // Game has ended. 
+    else {
+      this.#menu.print_winner(this.#game_controller.get_winner())
+      this.#menu.hide_throw_dice();
     }
   }
 

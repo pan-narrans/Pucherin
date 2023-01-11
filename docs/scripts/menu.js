@@ -90,13 +90,15 @@ class Menu {
     )
   }
 
-  print_turn(player) {
-    document.getElementById('game_info').innerHTML = `${player.get_name()}'s turn:`;
-  }
+  print_turn(player) { document.getElementById('game_info').innerHTML = `${player.get_name()}'s turn:`; }
+  print_winner(player) { document.getElementById('game_info').innerHTML = `${player.get_name()} wins the game!`; }
 
   print_board(cells) {
+    this.log('');
     cells.forEach(cell => { this.log(`Cell #${cell.get_number()}: ${cell.get_tokens()} tokens`) });
     this.log('Board Status:');
   }
+
+  hide_throw_dice() { document.getElementById('throw_dice').style.display = "none"; }
 
 }
