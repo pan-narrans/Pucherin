@@ -29,7 +29,7 @@ main {
 }
 
 #game_log {
-  max-height: 20vh;
+  max-height: 35vh;
   height: fit-content;
 
   overflow-y: scroll;
