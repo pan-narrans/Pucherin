@@ -15,9 +15,9 @@ main {
 }
 
 #board {
-  background-color: cadetblue;
   height: 100vh;
   max-height: 100vh;
+  padding: 0 !important;
 }
 
 #console {

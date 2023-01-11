@@ -10,7 +10,7 @@ class Board {
     'green': '#396C41',
     'dark_green': '#32350E',
     'yellow': '#D0BE58',
-    'orange': '#9E4B27',
+    'orange': '#b84f28',
     'red': '#B8342E',
     'brown': '#3C211A',
     'black': '#222'
@@ -84,8 +84,8 @@ class Board {
     this.#ctx.font = `bold ${size}px Arial`;
     this.#ctx.textAlign = "center";
     this.#ctx.textBaseline = "middle";
-
     this.#ctx.fillText(n, x, y);
+
   }
 
   paint_tokens(x, y, r, n, reds) {
@@ -117,7 +117,37 @@ class Board {
     this.#ctx.fill();
   }
 
-  // TODO: make the board look good on mobile devices by making it vertical.
+  // TODO darle una vuelta a esto
+  paint_border(w, h) {
+    let displace = 0;
+    this.#ctx.fillStyle = "white";
+    this.#ctx.fillRect(displace, displace, w - (displace * 2), h - (displace * 2));
+
+    displace = 20
+    this.#ctx.fillStyle = this.#color.lime;
+    this.#ctx.fillRect(displace, displace, w - (displace * 2), h - (displace * 2));
+
+    displace = 23
+    this.#ctx.fillStyle = this.#color.dark_green;
+    this.#ctx.fillRect(displace, displace, w - (displace * 2), h - (displace * 2));
+
+    displace = 25
+    this.#ctx.fillStyle = this.#color.green;
+    this.#ctx.fillRect(displace, displace, w - (displace * 2), h - (displace * 2));
+
+    displace = 45
+    this.#ctx.fillStyle = this.#color.dark_green;
+    this.#ctx.fillRect(displace, displace, w - (displace * 2), h - (displace * 2));
+
+    displace = 47
+    this.#ctx.fillStyle = this.#color.lime;
+    this.#ctx.fillRect(displace, displace, w - (displace * 2), h - (displace * 2));
+
+    displace = 50
+    this.#ctx.fillStyle = "cadetblue";
+    this.#ctx.fillRect(displace, displace, w - (displace * 2), h - (displace * 2));
+  }
+
   /**
    * Paints the pucherin board.
    * @param {*} cells Cell objects to paint.
@@ -127,8 +157,10 @@ class Board {
     let board_width = this.#canvas.width / 3;
     let board_height = this.#canvas.height / 3;
     let section_radius = Math.max(board_width, board_height) / 5;
-    let puchero_radius = section_radius * 1.2;
-    let angle = 10;
+    let puchero_radius = section_radius * 1.3;
+    let angle = 50;
+
+    this.paint_border(this.#canvas.width, this.#canvas.height);
 
     // Paint and space out the cells
     for (let i = 0; i < cells.length; i++) {
@@ -140,12 +172,6 @@ class Board {
 
       // Calculate the coordinates of the center of the sections using the circle formula,
       // but lying to make it look elliptical.
-      // let c1 = 0.45 / board_width;
-      // let c2 = 0.03 / board_width;
-      // let coordinates = {
-      //   'x': board_width * cos * Math.exp(c1 * Math.abs(board_width * cos)) + this.#canvas.width / 2,
-      //   'y': board_width * sin * (1 / Math.exp(c2 * Math.abs(board_width * sin))) + this.#canvas.height / 2,
-      // }
       let coordinates = {
         'x': board_width * cos + this.#canvas.width / 2,
         'y': board_height * sin + this.#canvas.height / 2,
