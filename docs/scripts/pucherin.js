@@ -38,6 +38,10 @@ class Pucherin {
         this.#game_controller.next_turn();
         this.#board.paint_board(this.#game_controller.get_cells(), this.#game_presets.puchero);
         this.#menu.print_players(this.#game_controller.get_players());
+        this.#menu.print_turn(this.#game_controller.get_current_player());
+        break;
+      case 'print_board':
+        this.#menu.print_board(this.#game_controller.get_cells())
         break;
       default:
         console.log(key);
@@ -50,6 +54,7 @@ class Pucherin {
     if (await this.#menu.game_menu()) {
       this.#game_controller.start_game(n_players);
       this.#menu.print_players(this.#game_controller.get_players());
+      this.#menu.print_turn(this.#game_controller.get_current_player());
     }
   }
 

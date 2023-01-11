@@ -19,6 +19,8 @@ class GameController {
   get_cell_tokens() { return this.#cells.map(c => c.get_tokens()).reduce((c_1, c_2) => c_1 + c_2) }
   /** @returns The sum of tokens from all the players in the game. */
   get_player_tokens() { return this.#players.map(p => p.get_tokens()).reduce((p_1, p_2) => p_1 + p_2) }
+  /** @returns The current playing player. */
+  get_current_player() { return this.#players[this.#turn % this.#players.length]; }
   /** Sorts the player array, use only for the final ranking. */
   sort_players() { this.#players.sort((p_1, p_2) => p_1.get_points() < p_2.get_points()).slice(0, 3); }
 
@@ -56,31 +58,32 @@ class GameController {
     // Checks if the game has ended;
     if (this.get_cell_tokens() === 0 && this.get_player_tokens() === 0) return false;
 
+    this.#turn++;
     let dice = this.dice_roll();
-    let player = this.#turn++ % this.#players.length;
+    let player = this.get_current_player();
     let cell = dice - 2;
 
     // Logs the dice roll.
-    let log = `${this.#players[player].get_name()} rolls ${[8, 11].includes(dice) ? "an" : "a"} ${dice}.`;
+    let log = `${player.get_name()} rolls ${[8, 11].includes(dice) ? "an" : "a"} ${dice}.`;
 
     switch (dice) {
       case 12:
         // If no more tokens can be placed, give out all the tokens in the board.
         if (this.get_player_tokens() === 0) {
-          log += `\n ${this.#players[player].get_name()} gets the board!`;
-          log += `\n ${this.#players[player].get_name()} gets ${this.get_cell_tokens()} points.`;
+          log += `\n ${player.get_name()} gets the board!`;
+          log += `\n ${player.get_name()} gets ${this.get_cell_tokens()} points.`;
 
-          this.#players[player].add_points(this.get_cell_tokens());
+          player.add_points(this.get_cell_tokens());
           this.reset_cells();
         }
         // If there are still players with tokens available, empty the puchero.
         else {
           cell = this.#presets['puchero'] - 2;
 
-          log += `\n ${this.#players[player].get_name()} gets the puchero!`;
-          log += `\n ${this.#players[player].get_name()} gets ${this.#cells[cell].get_tokens()} points.`;
+          log += `\n ${player.get_name()} gets the puchero!`;
+          log += `\n ${player.get_name()} gets ${this.#cells[cell].get_tokens()} points.`;
 
-          this.#players[player].add_points(this.#cells[cell].get_tokens());
+          player.add_points(this.#cells[cell].get_tokens());
           this.#cells[cell].reset_tokens()
         }
         break;
@@ -88,23 +91,23 @@ class GameController {
       default:
         // If the players hasn't got any tokens and the cell contains tokens,
         // empty the cell and give the tokens to the player.
-        if (this.#players[player].get_tokens() === 0 && this.#cells[cell].get_tokens() !== 0) {
-          log += `\n ${this.#players[player].get_name()} gets ${this.#cells[cell].get_tokens()} points.`;
+        if (player.get_tokens() === 0 && this.#cells[cell].get_tokens() !== 0) {
+          log += `\n ${player.get_name()} gets ${this.#cells[cell].get_tokens()} points.`;
 
-          this.#players[player].add_points(this.#cells[cell].get_tokens());
+          player.add_points(this.#cells[cell].get_tokens());
           this.#cells[cell].reset_tokens()
         }
         // If the player has tokens, they place one on the cell.
         // Should this token fill the cell, the get all the tokens inside.
         else {
           this.#cells[cell].add_token();
-          this.#players[player].subtract_token();
+          player.subtract_token();
 
           if (this.#cells[cell].is_full()) {
             log += `\n  Cell #${this.#cells[cell].get_number()} is full!`;
-            log += `\n  ${this.#players[player].get_name()} gets ${this.#cells[cell].get_tokens()} points.`;
+            log += `\n  ${player.get_name()} gets ${this.#cells[cell].get_tokens()} points.`;
 
-            this.#players[player].add_points(this.#cells[cell].get_tokens());
+            player.add_points(this.#cells[cell].get_tokens());
             this.#cells[cell].reset_tokens()
           }
         }

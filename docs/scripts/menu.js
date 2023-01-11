@@ -70,16 +70,33 @@ class Menu {
   }
 
   print_players(players) {
-    const ul = document.getElementById('players');
-    ul.innerHTML = "";
+    const player_list = document.getElementById('players');
+    player_list.innerHTML = "";
 
     players.forEach(
       p => {
-        const li = document.createElement('li');
-        li.innerHTML = ` ${p.get_name()}: ${p.get_tokens()} tokens, ${p.get_points()} points`
-        ul.appendChild(li);
+        const player = document.createElement('div');
+        player.id = p.get_name();
+        player.classList.add('d-flex');
+        player.innerHTML = `
+          <p><b>${p.get_name()}</b>:</p>
+          <ul style="padding: 0 0.5rem">
+          <li style="list-style: none;">${p.get_tokens()} tokens</li>
+          <li style="list-style: none;"> ${p.get_points()} points</li>
+          </ul>
+        `;
+        player_list.appendChild(player);
       }
     )
+  }
+
+  print_turn(player) {
+    document.getElementById('game_info').innerHTML = `${player.get_name()}'s turn:`;
+  }
+
+  print_board(cells) {
+    cells.forEach(cell => { this.log(`Cell #${cell.get_number()}: ${cell.get_tokens()} tokens`) });
+    this.log('Board Status:');
   }
 
 }
