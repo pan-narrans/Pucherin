@@ -126,9 +126,8 @@ class Board {
   paint_board(cells, puchero) {
     let board_width = this.#canvas.width / 3;
     let board_height = this.#canvas.height / 3;
-    let section_radius = Math.max(board_width, board_height) / 4.5;
-    // let section_radius = board_width / 4.5;
-    let puchero_radius = section_radius * 1.1;
+    let section_radius = Math.max(board_width, board_height) / 5;
+    let puchero_radius = section_radius * 1.2;
     let angle = 10;
 
     // Paint and space out the cells

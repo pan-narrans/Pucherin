@@ -1,14 +1,7 @@
-<p>Reglas del juego:</p>
-<ul>
-  <li>Si una ficha se completa, el jugador se lleva todas las fichas de la casilla.</li>
-  <li>Si sacas un 7, se añade una ficha al puchero</li>
-  <li>Si sacas un 12, te llevas el contenido del puchero</li>
-  <li>Si los jugadores no tienen más fichas que poner, se llevan las fichas que queden en la casilla</li>
-  <li>Si los jugadores no tienen más fichas que poner y saca un 12, se lleva todas las fichas del tablero,
-    incluido el puchero y finaliza el juego.</li>
-</ul>
+<h1>Pucherin</h1>
+<p>Bienvenidos al juego del Pucherin, un juego de mesa clásico español de los años 40.</p>
 
-<div class="input-group mb-3">
+<div class="input-group my-3">
   <label for="n_players"
          class="input-group-text">Número de jugadores:</label>
   <input id="n_players"
@@ -19,9 +12,30 @@
          value="2">
 </div>
 
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between mb-3">
   <button id="new_game"
           class="btn btn-primary">Nueva partida</button>
-  <button id="high_scores"
-          class="btn btn-outline-secondary">Records</button>
+  <button class="btn btn-outline-secondary"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#game_rules"> Reglas del juego </button>
 </div>
+
+<div class="collapse"
+     id="game_rules">
+  <div class="card card-body">
+    <h2>Cómo jugar al Pucherin:</h2>
+    <ul>
+      <li>Los jugadores juegan por turnos, tirando los dados y colocando sus fichas en el tablero.</li>
+      <li>El jugador tira dos dados y coloca una ficha en la casilla que toque.</li>
+      <li>Si una casilla se completa, el jugador se lleva todas las fichas de la casilla.</li>
+      <li>Si sale un 7, se añade una ficha al puchero.</li>
+      <li>Si sale un 12, el jugador se lleva el contenido del puchero.</li>
+      <li>Si los jugadores no tienen más fichas que poner, se llevan las fichas que queden en la casilla.</li>
+      <li>Si los jugadores no tienen más fichas que poner y saca un 12, se lleva todas las fichas del tablero,
+        incluido el puchero y finaliza el juego.</li>
+      <li>Gana el jugador con más fichas recogidas.</li>
+    </ul>
+  </div>
+</div>
+
