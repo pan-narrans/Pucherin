@@ -1,9 +1,9 @@
 <h1>Pucherin</h1>
-<p>Bienvenidos al juego del Pucherin, un juego de mesa clásico español de los años 40.</p>
+<p>Welcome to the game of Pucherin, a classical Spanish board game from the 40's. <br> From 2 to 6 players.</p>
 
 <div class="input-group my-3">
   <label for="n_players"
-         class="input-group-text">Número de jugadores:</label>
+         class="input-group-text">Number of players:</label>
   <input id="n_players"
          class="form-control"
          type="number"
@@ -14,29 +14,33 @@
 
 <div class="d-flex justify-content-between mb-3">
   <button id="new_game"
-          class="btn btn-success">Nueva partida</button>
+          class="btn btn-success">New Game</button>
   <button class="btn btn-outline-secondary"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#game_rules">
     <img src="img/book.svg"
-         class="icon"> Reglas del juego </button>
+         class="icon"> Rule Book </button>
 </div>
 
 <div class="collapse"
      id="game_rules">
   <div class="card card-body">
-    <h2>Cómo jugar al Pucherin:</h2>
+    <h2>How to play Pucherin:</h2>
+    <p><i>These are the rules of the original board game. Most of the actions required to play the game are done
+        automatically in this browser version.</i></p>
     <ul>
-      <li>Los jugadores juegan por turnos, tirando los dados y colocando sus fichas en el tablero.</li>
-      <li>El jugador tira dos dados y coloca una ficha en la casilla que toque.</li>
-      <li>Si una casilla se completa, el jugador se lleva todas las fichas de la casilla.</li>
-      <li>Si sale un 7, se añade una ficha al puchero.</li>
-      <li>Si sale un 12, el jugador se lleva el contenido del puchero.</li>
-      <li>Si los jugadores no tienen más fichas que poner, se llevan las fichas que queden en la casilla.</li>
-      <li>Si los jugadores no tienen más fichas que poner y saca un 12, se lleva todas las fichas del tablero,
-        incluido el puchero y finaliza el juego.</li>
-      <li>Gana el jugador con más fichas recogidas.</li>
+      <li>Players play in turns.</li>
+      <li>Each player throws two dice, sums the outcome and then places a token in the corresponding cell.</li>
+      <li>If a cell gets full, the last player to place a token in the cell gets all the tokens from said cell.</li>
+      <li>If a 7 is rolled, a token is added to the <i>puchero</i>.</li>
+      <li>If a 12 is rolled, the player gets all the tokens inside the <i>puchero</i>.</li>
+      <li>If a player hasn't got any more tokens to place, they get all the tokens remaining in the cell.</li>
+      <li>If all players haven't got any more tokens to place, the first player to roll a 12 gets all the remaining
+        tokens in the board, including the <i>puchero</i>.</li>
+      <li>When no more tokens remain in the board, the game finishes.</li>
+      <li>The player with the most picked tokens wins.</li>
+      <li>Tokens picked from the board cannot be placed again.</li>
     </ul>
   </div>
 </div>

@@ -19,17 +19,22 @@ main {
   padding-right: 6px;
 }
 
+.btn-success {
+  background-color: #46834f;
+}
+
+.btn-success:hover {
+  background-color: #50965b;
+}
+
 #board {
-  height: 100vh;
   max-height: 100vh;
   padding: 0 !important;
 }
 
 #console {
-  box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: scroll;
-  height: 100vh;
   max-height: 100vh;
 }
 
@@ -45,13 +50,9 @@ main {
 }
 
 #game_log>* {
-  width: 100%;
-  overflow-wrap: break-word;
   font-family: monospace;
 }
 
-
-/* TODO: ugly solution */
 #game_log li {
   list-style: none;
 }
@@ -61,20 +62,10 @@ main {
   margin: 0 5px 0 -15px;
 }
 
-
-.shaded {
-  background-color: aliceblue;
-}
-
-@media screen and (max-width: 480px) {
-  #board {
-    height: 40vh;
-  }
+@media screen and (max-width:520px) {
 
   #console {
-    box-sizing: border-box;
     overflow: hidden;
-    height: auto;
     max-height: max-content;
   }
 

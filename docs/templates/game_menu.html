@@ -1,10 +1,11 @@
 <div class="d-flex justify-content-between mb-3">
   <p id="game_info"
-     class="fs-3 my-0">Turno de Jugador 1:</p>
+     class="fs-2 my-0"></p>
   <button id="throw_dice"
           class="btn btn-success fw-bold">
     <img src="img/dice.svg"
-         class="icon"> Tirar Dados</button>
+         class="icon"
+         id="throw_dice"> Dice Roll</button>
 </div>
 
 <div id="players"
@@ -12,15 +13,32 @@
 
 <div class="d-flex justify-content-between">
   <button id="end_game"
-          class="btn btn-outline-secondary">Acabar Partida</button>
+          class="btn btn-outline-secondary">
+    <img src="img/home.svg"
+         class="icon">Back to Menu</button>
 
   <div class="btn-group"
        role="group">
     <button id="print_board"
-            class="btn btn-outline-secondary">Imprimir Tablero</button>
+            class="btn btn-outline-secondary">
+      <svg viewBox="0 0 21 21"
+           class="icon">
+        <g fill="none"
+           stroke="#396C41"
+           transform="translate(3 3)">
+          <path
+                d="m2.5.5h10c1.1045695 0 2 .8954305 2 2v10c0 1.1045695-.8954305 2-2 2h-10c-1.1045695 0-2-.8954305-2-2v-10c0-1.1045695.8954305-2 2-2z">
+          </path>
+          <path d="m3.5 12.5h8"></path>
+        </g>
+      </svg>
+
+      Print Board</button>
     <button class="btn btn-outline-secondary"
             data-bs-toggle="collapse"
-            data-bs-target="#game_log_container">Game Log</button>
+            data-bs-target="#game_log_container">
+      <img src="img/document.svg"
+           class="icon">Toggle Game Log</button>
   </div>
 </div>
 

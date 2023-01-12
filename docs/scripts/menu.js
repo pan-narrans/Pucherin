@@ -81,10 +81,10 @@ class Menu {
         player.innerHTML = `
           <p><b>${p.get_name()}</b>:</p>
           <ul style="padding: 0 0.5rem">
-          <li style="list-style: none;">${p.get_tokens()} tokens</li>
-          <li style="list-style: none;"> ${p.get_points()} points</li>
-          </ul>
-        `;
+          <li style="list-style: none;">${p.get_tokens().toString().padEnd(4, '\xA0')} tokens</li >
+          <li style="list-style: none;"> ${p.get_points().toString().padEnd(4, '\xA0')} points</li>
+          </ul >
+      `;
         player_list.appendChild(player);
       }
     )
@@ -93,12 +93,21 @@ class Menu {
   print_turn(player) { document.getElementById('game_info').innerHTML = `${player.get_name()}'s turn:`; }
   print_winner(player) { document.getElementById('game_info').innerHTML = `${player.get_name()} wins the game!`; }
 
-  print_board(cells) {
+  print_board(cells, puchero) {
     this.log('');
-    cells.forEach(cell => { this.log(`Cell #${cell.get_number()}: ${cell.get_tokens()} tokens`) });
-    this.log('Board Status:');
+    cells.forEach(cell => {
+      let number = `${cell.get_number()}:`.padEnd(3, '\xA0');
+      let tokens = (cell.get_number() != puchero) ? cell.get_tokens() : '?';
+      this.log(`Cell #${number} ${tokens} tokens.`);
+    });
+
+    this.log('<b>Board Status:</b>');
   }
 
-  hide_throw_dice() { document.getElementById('throw_dice').style.display = "none"; }
+  hide_throw_dice() {
+    document.getElementById('throw_dice').style.display = "none";
+    document.getElementById('end_game').classList.remove('btn-outline-secondary');
+    document.getElementById('end_game').classList.add('btn-success');
+  }
 
 }

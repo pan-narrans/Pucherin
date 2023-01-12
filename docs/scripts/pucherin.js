@@ -38,7 +38,7 @@ class Pucherin {
         this.next_turn();
         break;
       case 'print_board':
-        this.#menu.print_board(this.#game_controller.get_cells())
+        this.#menu.print_board(this.#game_controller.get_cells(), this.#game_presets.puchero)
         break;
       default:
         console.log(key);

@@ -41,11 +41,14 @@ class Board {
   }
 
   static resize_canvas() {
+    const board = document.getElementById('board');
+    board.style.height = (window.innerWidth > window.innerHeight) ? "100vh" : "40vh";
+
     const canvas = document.getElementById('board_canvas');
     let scale = 2;
 
-    let width = document.getElementById('board').clientWidth;
-    let height = document.getElementById('board').clientHeight;
+    let width = board.clientWidth;
+    let height = board.clientHeight;
 
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";

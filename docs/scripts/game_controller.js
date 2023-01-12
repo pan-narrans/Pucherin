@@ -61,7 +61,6 @@ class GameController {
     // Checks if the game has ended;
     if (this.get_cell_tokens() === 0 && this.get_player_tokens() === 0) return false;
 
-    this.#turn++;
     let dice = GameController.dice_roll();
     let player = this.get_current_player();
     let cell = dice - 2;
@@ -83,7 +82,7 @@ class GameController {
         else {
           cell = this.#presets['puchero'] - 2;
 
-          log += `\n ${player.get_name()} gets the puchero!`;
+          log += `\n <b>${player.get_name()} gets the puchero!</b>`;
           log += `\n ${player.get_name()} gets ${this.#cells[cell].get_tokens()} points.`;
 
           player.add_points(this.#cells[cell].get_tokens());
@@ -107,7 +106,7 @@ class GameController {
           player.subtract_token();
 
           if (this.#cells[cell].is_full()) {
-            log += `\n  Cell #${this.#cells[cell].get_number()} is full!`;
+            log += `\n  <b>Cell #${this.#cells[cell].get_number()} is full!</b>`;
             log += `\n  ${player.get_name()} gets ${this.#cells[cell].get_tokens()} points.`;
 
             player.add_points(this.#cells[cell].get_tokens());
@@ -120,10 +119,13 @@ class GameController {
 
     // End game message & sort players.
     if (this.get_cell_tokens() === 0 && this.get_player_tokens() === 0) {
-      GameController.sort_players(this.#players)
-      this.#ctrl.log(`The game has ended.\n${this.get_winner().get_name()} wins the game!\nThanks for playing.`);
+      let message = 'The game has ended.';
+      message += `\n <b>${this.get_winner().get_name()} wins the game!</b>`;
+      message += '\n Thanks for playing.';
+      this.#ctrl.log(message);
     }
 
+    this.#turn++;
     return true;
   }
 
