@@ -10,6 +10,7 @@ class Player {
   }
 
   set_tokens(tokens) { this.#tokens = (tokens > 0) ? tokens : 0; }
+  set_points(points) { this.#points = points; }
 
   get_name() { return this.#name; }
   get_tokens() { return this.#tokens; }

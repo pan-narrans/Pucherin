@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Pucherin Mocha Tests</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet"
+        href="https://unpkg.com/mocha/mocha.css" />
+</head>
+
+<body>
+  <!-- MOCHA SETUP -->
+  <div id="mocha"></div>
+
+  <script src="https://unpkg.com/chai/chai.js"></script>
+  <script src="https://unpkg.com/mocha/mocha.js"></script>
+
+  <script class="mocha-init">
+    mocha.setup('bdd');
+    mocha.checkLeaks();
+  </script>
+
+  <!-- SCRIPTS TO TEST -->
+  <script src="../docs/scripts/player.js"></script>
+  <script src="../docs/scripts/game_controller.js"></script>
+
+  <!-- TESTS TO RUN -->
+  <script src="test.game_controller.js"></script>
+
+  <!-- RUN TESTS -->
+  <script class="mocha-exec"> mocha.run(); </script>
+
+</body>
+
+</html>

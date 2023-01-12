@@ -22,14 +22,15 @@ class GameController {
   /** @returns The current playing player. */
   get_current_player() { return this.#players[this.#turn % this.#players.length]; }
   /** @returns The current winning player. */
-  get_winner() { return this.sort_players()[0]; }
-  /** Sorts the player array, use only for the final ranking. */
-  sort_players() { return this.#players.slice().sort((p_1, p_2) => p_1.get_points() < p_2.get_points()); }
+  get_winner() { return GameController.sort_players(this.#players)[0]; }
 
   /** Resets all the cells' tokens. */
   reset_cells() { this.#cells.forEach(cell => cell.reset_tokens()) }
-  /** Simulates a two dice roll. */
-  dice_roll() { return Math.ceil(Math.random() * 11) + 1; }
+
+  /** Simulates the sum of the rolls of two D6. */
+  static dice_roll() { return Math.ceil(Math.random() * 11) + 1; }
+  /** Sorts the player array, use only for the final ranking. */
+  static sort_players(players) { return players.slice().sort((p_1, p_2) => p_1.get_points() < p_2.get_points()); }
 
   /**
    * Resets and creates the cell array used to play the game.
@@ -61,7 +62,7 @@ class GameController {
     if (this.get_cell_tokens() === 0 && this.get_player_tokens() === 0) return false;
 
     this.#turn++;
-    let dice = this.dice_roll();
+    let dice = GameController.dice_roll();
     let player = this.get_current_player();
     let cell = dice - 2;
 
@@ -119,7 +120,7 @@ class GameController {
 
     // End game message & sort players.
     if (this.get_cell_tokens() === 0 && this.get_player_tokens() === 0) {
-      this.sort_players()
+      GameController.sort_players(this.#players)
       this.#ctrl.log(`The game has ended.\n${this.get_winner().get_name()} wins the game!\nThanks for playing.`);
     }
 
