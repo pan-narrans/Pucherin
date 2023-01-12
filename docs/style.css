@@ -14,6 +14,11 @@ main {
   margin: 0;
 }
 
+.icon {
+  height: 25px;
+  padding-right: 6px;
+}
+
 #board {
   height: 100vh;
   max-height: 100vh;
