@@ -4,11 +4,20 @@
 
 - [Pucherin](#pucherin)
   - [Play the game](#play-the-game)
+  - [Unit testing](#unit-testing)
   - [Reglas](#reglas)
 
 ## Play the game
 
 The game is deployed using github pages and can be played [through here](https://pan-narrans.github.io/Pucherin/).
+
+Icons taken from [svgrepo.com](https://www.svgrepo.com).
+
+---
+
+## Unit testing
+
+Se pueden ver los tests [pinchando aquí](https://pan-narrans.github.io/Pucherin/tests).
 
 ## Reglas
 
@@ -19,7 +28,6 @@ The game is deployed using github pages and can be played [through here](https:/
 - Si sacas un 12, te llevas el contenido del puchero
 
 - Se añade una ficha a la casilla, si está casilla se completa, te las llevas todas.
-
 
 - Si los jugadores no tienen más fichas que poner, se llevan las fichas que queden en la casilla
 - Si los jugadores no tienen más fichas que poner y saca un 12, se lleva todas las fichas del tablero, incluido el puchero.
