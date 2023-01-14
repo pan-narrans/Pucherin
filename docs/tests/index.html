@@ -19,6 +19,9 @@
   <script class="mocha-init">
     mocha.setup('bdd');
     mocha.checkLeaks();
+    function better_dice_roll(faces, num) {
+      return Math.floor(Math.random() * ((faces * num + 1) - num) + num);
+    }
   </script>
 
   <!-- SCRIPTS TO TEST -->

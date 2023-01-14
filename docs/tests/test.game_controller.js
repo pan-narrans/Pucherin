@@ -13,6 +13,23 @@ describe("Dice roll", function () {
   });
 });
 
+describe("Better Dice roll", function () {
+  dice_rolls = [];
+  for (let i = 0; i < 500; i++) { dice_rolls.push(better_dice_roll(6, 2)); }
+
+  it("Should be less or equal to 12.", function () {
+    dice_rolls.filter(roll => roll > 12).length.should.be.equal(0);
+  });
+  it("Should be equal or bigger than 2.", function () {
+    dice_rolls.filter(roll => roll < 2).length.should.be.equal(0);
+  });
+  it("Some should be equal to 2", function () {
+    dice_rolls.filter(roll => roll == 2).length.should.be.at.least(1);
+  });
+  it("Some should be equal to 12", function () {
+    dice_rolls.filter(roll => roll == 12).length.should.be.at.least(1);
+  });
+});
 
 describe("Sort players by score", function () {
   let players = [];
