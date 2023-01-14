@@ -93,7 +93,9 @@ class GameController {
       default:
         // If the players hasn't got any tokens and the cell contains tokens,
         // empty the cell and give the tokens to the player.
-        if (player.get_tokens() === 0 && this.#cells[cell].get_tokens() !== 0) {
+        if (player.get_tokens() === 0
+          && this.#cells[cell].get_tokens() !== 0
+          && cell != this.#presets['puchero'] - 2) {
           log += `\n ${player.get_name()} gets ${this.#cells[cell].get_tokens()} points.`;
 
           player.add_points(this.#cells[cell].get_tokens());
@@ -101,7 +103,7 @@ class GameController {
         }
         // If the player has tokens, they place one on the cell.
         // Should this token fill the cell, the get all the tokens inside.
-        else {
+        else if (player.get_tokens() !== 0) {
           this.#cells[cell].add_token();
           player.subtract_token();
 
@@ -112,7 +114,7 @@ class GameController {
             player.add_points(this.#cells[cell].get_tokens());
             this.#cells[cell].reset_tokens()
           }
-        }
+        } else { log += '\nNothing happens...'; }
     }
 
     this.#ctrl.log(log);

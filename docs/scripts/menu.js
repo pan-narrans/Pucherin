@@ -2,9 +2,9 @@ class Menu {
   #menu;
   #controller;
 
-  constructor(controller, menu) {
+  constructor(controller) {
     this.#controller = controller;
-    this.#menu = menu;
+    this.#menu = document.getElementById('menu');
     this.#menu.addEventListener('click', e => this.#controller.handle_click(e.target.id))
   }
 
@@ -67,6 +67,7 @@ class Menu {
     new_log.innerHTML = `${str}`;
     document.getElementById('game_log')
       .insertBefore(new_log, document.getElementById('game_log').firstChild);
+    console.log(str);
   }
 
   print_players(players) {
@@ -94,7 +95,7 @@ class Menu {
   print_winner(player) { document.getElementById('game_info').innerHTML = `${player.get_name()} wins the game!`; }
 
   print_board(cells, puchero) {
-    this.log('');
+    this.log('\xA0');
     cells.forEach(cell => {
       let number = `${cell.get_number()}:`.padEnd(3, '\xA0');
       let tokens = (cell.get_number() != puchero) ? cell.get_tokens() : '?';

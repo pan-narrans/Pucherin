@@ -7,9 +7,6 @@ class Pucherin {
     'starting tokens': 50,    // tokens per player
   }
 
-  // DOM references
-  #menu_dom = document.getElementById('menu');
-
   // Element references
   #board;
   #game_controller;
@@ -17,7 +14,7 @@ class Pucherin {
 
   constructor() {
     this.#board = new Board();
-    this.#menu = new Menu(this, this.#menu_dom);
+    this.#menu = new Menu(this);
     this.#game_controller = new GameController(this, this.#game_presets);
   }
 
@@ -75,7 +72,7 @@ class Pucherin {
   }
 
   log(str) {
-    try { this.#menu.log(''); str.split('\n').reverse().forEach(line => { this.#menu.log(line.trim()); }); }
+    try { this.#menu.log('\xA0'); str.split('\n').reverse().forEach(line => { this.#menu.log(line.trim()); }); }
     catch { console.log(`Couldn't print: ${str}`) }
   }
 
