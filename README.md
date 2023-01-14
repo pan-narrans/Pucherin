@@ -5,6 +5,7 @@
 - [Pucherin](#pucherin)
   - [Play the game](#play-the-game)
   - [Unit testing](#unit-testing)
+  - [Modo texto](#modo-texto)
   - [Reglas](#reglas)
 
 ## Play the game
@@ -18,6 +19,10 @@ Icons taken from [svgrepo.com](https://www.svgrepo.com).
 ## Unit testing
 
 Se pueden ver los tests [pinchando aquí](https://pan-narrans.github.io/Pucherin/tests).
+
+## Modo texto
+
+El modo texto se encuentra [pinchando aquí](https://github.com/pan-narrans/Pucherin/tree/main/text%20mode).
 
 ## Reglas
 
