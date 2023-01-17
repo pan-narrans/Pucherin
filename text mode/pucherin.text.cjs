@@ -64,7 +64,8 @@ Players.prototype = {
     for (let i = 1; i < num + 1; i++) { this.array.push(new Player(`Player ${i}`, tokens)); }
   },
   get_tokens: function () { return this.array.map(p => p.tokens).reduce((p1, p2) => p1 + p2) },
-  get_winner: function () { return this.array.slice().sort((p1, p2) => p1.points < p2.points)[0]; }, print: function () {
+  get_winner: function () { return this.array.slice().sort((p1, p2) => p1.points < p2.points)[0]; }, 
+  print: function () {
     console.log('PLAYERS')
     this.array.forEach(player => {
       let name = `${player.name}:`;
